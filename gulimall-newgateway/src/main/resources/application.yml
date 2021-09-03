@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      # routes:路由规则，表示可匹配多个
+      routes:
+        # id：路由id，要保证唯一
+        - id: test_route
+          # uri：满足断言后去的地址
+          uri: https://blog.csdn.net/hancoder/article/details/106922139
+          # predicates：断言，判断是否符合此规则
+          predicates:
+            - Query=url,baidu
+
+        - id: qq_route
+          uri: https://www.bilibili.com/video/BV1np4y1C7Yf?p=27&spm_id_from=pageDriver
+          predicates:
+            - Query=url,qq

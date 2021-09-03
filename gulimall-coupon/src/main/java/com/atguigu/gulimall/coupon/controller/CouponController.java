@@ -38,15 +38,15 @@ public class CouponController {
     /**
      * 测试nacos配置中心
      */
-    @Value("${coupon.user.name}")//从application.properties中获取//不要写user.name，他是环境里的变量
-    private String name;
-    @Value("${coupon.user.age}")
-    private Integer age;
-    @RequestMapping("/test")
-    public R test(){
-
-        return R.ok().put("name",name).put("age",age);
-    }
+//    @Value("${spring.datasource.name}")//从application.properties中获取//不要写user.name，他是环境里的变量
+//    private String name;
+//    @Value("${cspring.datasource.passsword}")
+//    private Integer age;
+//    @RequestMapping("/test")
+//    public R test(){
+//
+//        return R.ok().put("name",name).put("age",age);
+//    }
 
 
     /**
