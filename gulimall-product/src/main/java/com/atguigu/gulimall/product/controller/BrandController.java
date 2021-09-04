@@ -1,9 +1,17 @@
 package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.atguigu.common.valid.AddGroup;
+import com.atguigu.common.valid.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +23,7 @@ import com.atguigu.gulimall.product.service.BrandService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -58,7 +67,32 @@ public class BrandController {
      */
     @RequestMapping("/save")
     // @RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
+    // @Valid:是为了告诉spring-mvc,我们的这个字段是需要校验的，不加这个注解的则不进行校验
+    /**
+     * @Valid:是为了告诉spring-mvc,我们的这个字段是需要校验的，不加这个注解的则不进行校验
+     * BindResult:里面封装了@Valid校验后的结果
+     */
+    /**
+     * Validated：指定校验分组
+     */
+    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand /*, BindingResult bindingResult*/){
+//        // 如果校验出错
+//        if (bindingResult.hasErrors()) {
+//            // 将错误信息封装成map返回
+//            Map<String,String> map = new HashMap<>();
+//            // 获取所有字段出错的错误信息--FieldError
+//            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+//            for (FieldError fieldError : fieldErrors) {
+//                // 校验出错的字段
+//                String field = fieldError.getField();
+//                // 定义的错误提示消息
+//                String defaultMessage = fieldError.getDefaultMessage();
+//                // 封装结果
+//                map.put(field,defaultMessage);
+//            }
+//
+//            return R.error(400,"提交的数据不合法").put("data",map);
+//        }
 		brandService.save(brand);
 
         return R.ok();
@@ -69,7 +103,7 @@ public class BrandController {
      */
     @RequestMapping("/update")
     // @RequiresPermissions("product:brand:update")
-    public R update(@RequestBody BrandEntity brand){
+    public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand){
 		brandService.updateById(brand);
 
         return R.ok();

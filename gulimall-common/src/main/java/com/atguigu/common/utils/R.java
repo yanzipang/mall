@@ -57,6 +57,14 @@ public class R extends HashMap<String, Object> {
 		return new R();
 	}
 
+	public static R error(int code, String message, Map<String, String> map) {
+		R r = new R();
+		r.put("code", code);
+		r.put("msg", message);
+		r.put("data",map);
+		return r;
+	}
+
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;

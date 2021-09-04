@@ -16,10 +16,21 @@ spring:
 mybatis-plus:
   # 扫描sql映射文件位置
   mapper-locations: classpath:/mapper/**/*.xml
-  # 开启主键自增
+  # mp全局配置
   global-config:
     db-config:
+      # 开启主键自增
       id-type: auto
+      # 配置逻辑删除
+      # logic-delete-value: 1---代表1表示已删除
+      logic-delete-value: 1
+      # logic-not-delete-value: 0---代表0表示未删除
+      logic-not-delete-value: 0
+
 
 server:
   port: 10000
+# 修改日志打印级别
+logging:
+  level:
+    com.atguigu.gulimall: debug

@@ -15,3 +15,17 @@ spring:
           uri: https://www.bilibili.com/video/BV1np4y1C7Yf?p=27&spm_id_from=pageDriver
           predicates:
             - Query=url,qq
+
+        # id：路由id，要保证唯一
+        - id: product_route
+          # uri：满足断言后去的地址，加lb是代表开启负载均衡
+          uri: lb://gulimall-product
+          # predicates：断言，判断是否符合此规则
+          predicates:
+            # Path：按照路径进行断言
+            - Path=/api/product/**
+          # filters:进行路径重写，防止转发后的地址与真实地址不匹配
+          filters:
+            # 代表把api前缀去掉，剩下的保留
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+
